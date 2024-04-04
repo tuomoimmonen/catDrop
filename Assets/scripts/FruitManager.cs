@@ -6,13 +6,17 @@ using UnityEngine;
 public class FruitManager : MonoBehaviour
 {
     [Header("Elements")]
-    [SerializeField] GameObject fruitPrefab;
+    [SerializeField] Fruit[] fruitPrefabs;
+    [SerializeField] Fruit[] firstSpawnableFruits;
     [SerializeField] Camera cam; //main camera
     [SerializeField] LineRenderer fruitSpawnLine;
-    private GameObject currentFruit;
+    private Fruit currentFruit;
+    [SerializeField] Transform fruitsParent;
 
     [Header("Settings")]
     [SerializeField] Transform fruitsYspawnPosition; //y position for fruit
+    private bool canSpawnFruit;
+    private bool isControllingFruit;
 
     [Header("Debug")]
     [SerializeField] bool enableGizmos;
@@ -20,11 +24,21 @@ public class FruitManager : MonoBehaviour
     private void Awake()
     {
         HideLine();
+        canSpawnFruit = true;
+        MergeManager.onMergeHandled += MergeCallback;
+    }
+
+    private void OnDisable()
+    {
+        MergeManager.onMergeHandled -= MergeCallback;
     }
 
     void Update()
     {
-        ManagePlayerInput();
+        if(canSpawnFruit)
+        {
+            ManagePlayerInput();
+        }
     }
 
     private void ManagePlayerInput()
@@ -33,14 +47,19 @@ public class FruitManager : MonoBehaviour
         {
             MouseDownCallback();
         }
+
         else if (Input.GetMouseButton(0)) //drag touch
         {
-            MouseDragCallback();
+            if (isControllingFruit)
+                MouseDragCallback();
+            else
+                MouseDownCallback();
         }
-        else if (Input.GetMouseButtonUp(0)) //remove touch
+
+        else if (Input.GetMouseButtonUp(0) && isControllingFruit) //remove touch
         {
             MouseUpCallback();
-            currentFruit.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            
         }
 
     }
@@ -51,7 +70,7 @@ public class FruitManager : MonoBehaviour
         Vector2 spawnPosition = GetSpawnPosition();
         //spawnPosition.y = fruitsYspawnPosition.position.y;
 
-        currentFruit = Instantiate(fruitPrefab, spawnPosition, Quaternion.identity);
+        currentFruit = Instantiate(firstSpawnableFruits[Random.Range(0, firstSpawnableFruits.Length)], spawnPosition, Quaternion.identity, fruitsParent);
     }
 
     private void MouseDownCallback()
@@ -59,17 +78,26 @@ public class FruitManager : MonoBehaviour
         ShowLine();
         MoveFruitSpawnLine();
         SpawnFruit();
+
+        isControllingFruit = true;
     }
 
     private void MouseDragCallback()
     {
         MoveFruitSpawnLine();
-        currentFruit.transform.position = GetSpawnPosition();
+        currentFruit.MoveTo(GetSpawnPosition());
     }
 
     private void MouseUpCallback()
     {
         HideLine();
+        canSpawnFruit = false;
+        isControllingFruit = false;
+        if(currentFruit != null)
+        {
+            currentFruit.EnablePhysics();
+        }
+        StartControlTimer();
     }
 
     private Vector2 GetClickedWorldPosition()
@@ -86,6 +114,23 @@ public class FruitManager : MonoBehaviour
         return clickedWorldPosition;
     }
 
+    private void MergeCallback(FruitType fruitType, Vector2 spawnPosition)
+    {
+        for (int i = 0; i < fruitPrefabs.Length; i++)
+        {
+            if (fruitPrefabs[i].GetFruitType() == fruitType)
+            {
+                SpawnMergedFruit(fruitPrefabs[i], spawnPosition); break;
+            }
+        }
+    }
+
+    private void SpawnMergedFruit(Fruit fruit, Vector2 spawnPosition)
+    {
+        Fruit fruitInstance = Instantiate(fruit, spawnPosition, Quaternion.identity, fruitsParent);
+        fruitInstance.EnablePhysics();
+    }
+
     private void MoveFruitSpawnLine()
     {
         fruitSpawnLine.SetPosition(0, GetSpawnPosition());
@@ -100,6 +145,16 @@ public class FruitManager : MonoBehaviour
     private void ShowLine()
     {
         fruitSpawnLine.enabled = true;
+    }
+
+    private void StartControlTimer()
+    {
+        Invoke("StopControlTimer", 0.5f);
+    }
+
+    private void StopControlTimer()
+    {
+        canSpawnFruit = true;
     }
 
 #if UNITY_EDITOR

@@ -540,10 +540,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9318ef6ba1886146aa4072fd0b5b94f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitPrefab: {fileID: 611526713425440089, guid: 795f45b17a5d1bf499c9c63bf3aa6c0e,
-    type: 3}
+  fruitPrefabs:
+  - {fileID: 3358031588739948491, guid: 795f45b17a5d1bf499c9c63bf3aa6c0e, type: 3}
+  - {fileID: 3358031588739948491, guid: 20352d0c8c5387b438e4c90e1ebd8088, type: 3}
+  - {fileID: 3358031588739948491, guid: edb4ec96a0d8104439a73ee0ecf5c85a, type: 3}
+  - {fileID: 3358031588739948491, guid: 52ecca6b23534c44894f1146bdcdeebd, type: 3}
+  - {fileID: 3358031588739948491, guid: 58d0e0ccd64a9214fa4e4d4b14d4df75, type: 3}
+  - {fileID: 3358031588739948491, guid: 1a789717f4fdce147889ee578a3cbb6a, type: 3}
+  - {fileID: 3358031588739948491, guid: cb3b760bbaa31ce40bba1931636a0325, type: 3}
+  - {fileID: 3358031588739948491, guid: ccadf448020d20d4e8466c28dc9c5ea4, type: 3}
+  - {fileID: 3358031588739948491, guid: a3e5f2bd263a6d34ba7e0adc9d64cf83, type: 3}
+  - {fileID: 3358031588739948491, guid: 0357977ff0ff31f48a4033887d7c9b2e, type: 3}
+  firstSpawnableFruits:
+  - {fileID: 3358031588739948491, guid: 795f45b17a5d1bf499c9c63bf3aa6c0e, type: 3}
+  - {fileID: 3358031588739948491, guid: 20352d0c8c5387b438e4c90e1ebd8088, type: 3}
   cam: {fileID: 330585545}
   fruitSpawnLine: {fileID: 315479358}
+  fruitsParent: {fileID: 1024777013}
   fruitsYspawnPosition: {fileID: 689803295}
   enableGizmos: 1
 --- !u!4 &458941432
@@ -561,6 +574,7 @@ Transform:
   m_Children:
   - {fileID: 689803295}
   - {fileID: 315479357}
+  - {fileID: 1024777013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689803294
@@ -589,6 +603,81 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 458941432}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &980235221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 980235223}
+  - component: {fileID: 980235222}
+  m_Layer: 0
+  m_Name: MergeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &980235222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980235221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7dabee8d6c8ac4ea9abf9f9e907ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &980235223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980235221}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1024777012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024777013}
+  m_Layer: 0
+  m_Name: fruits parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1024777013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024777012}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -828,3 +917,4 @@ SceneRoots:
   - {fileID: 1696037596}
   - {fileID: 1661229019}
   - {fileID: 458941432}
+  - {fileID: 980235223}
