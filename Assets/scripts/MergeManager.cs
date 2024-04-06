@@ -37,8 +37,11 @@ public class MergeManager : MonoBehaviour
 
         Vector2 mergedSpawnPosition = (sender.transform.position + otherFruit.transform.position) / 2;
 
-        Destroy(sender.gameObject);
-        Destroy(otherFruit.gameObject);
+        //Destroy(sender.gameObject);
+        //Destroy(otherFruit.gameObject);
+
+        sender.HandleMerge();
+        otherFruit.HandleMerge();
 
         StartCoroutine(ResetLastSender());
 

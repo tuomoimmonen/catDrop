@@ -9,6 +9,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameObject gamePanel;
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject menuPanel;
+    [SerializeField] GameObject settingsPanel;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class UiManager : MonoBehaviour
         menuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         gamePanel.SetActive(false);
+        settingsPanel.SetActive(false);
     }
 
     private void SetGameOver()
@@ -66,5 +68,15 @@ public class UiManager : MonoBehaviour
     public void NextButtonCallback()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void SettingsButtonCallback()
+    {
+        settingsPanel.SetActive(true);
+    }
+
+    public void CloseSettingsPanel()
+    {
+        settingsPanel.SetActive(false);
     }
 }
