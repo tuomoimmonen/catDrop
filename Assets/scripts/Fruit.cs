@@ -8,18 +8,31 @@ public class Fruit : MonoBehaviour
     [Header("Elements")]
     private Rigidbody2D fruitRb;
     private CircleCollider2D fruitCollider;
+    [SerializeField] SpriteRenderer fruitSprite;
 
-    [Header("Elements")]
+    [Header("Events")]
     public static Action<Fruit, Fruit> onFruitCollision;
 
     [Header("Data")]
     [SerializeField] FruitType fruitType;
+    private bool hasCollided;
+    private bool canFruitMerge;
 
 
     private void Awake()
     {
         fruitCollider = GetComponent<CircleCollider2D>();
         fruitRb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        Invoke("AllowFruitMerge", 0.5f);
+    }
+
+    private void AllowFruitMerge()
+    {
+        canFruitMerge = true;
     }
 
     public void EnablePhysics()
@@ -41,9 +54,25 @@ public class Fruit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.TryGetComponent(out Fruit otherFruit))
+        ManageCollision(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        ManageCollision(collision);
+    }
+
+    private void ManageCollision(Collision2D collision)
+    {
+        hasCollided = true;
+
+        if (!canFruitMerge) { return; }
+
+        if (collision.collider.TryGetComponent(out Fruit otherFruit))
         {
-            if(otherFruit.GetFruitType() != fruitType)
+            if (!otherFruit.CanFruitMerge()) { return; }
+
+            if (otherFruit.GetFruitType() != fruitType)
             {
                 return;
             }
@@ -56,5 +85,20 @@ public class Fruit : MonoBehaviour
     public FruitType GetFruitType()
     {
         return fruitType;
+    }
+
+    public Sprite GetFruitSprite()
+    {
+        return fruitSprite.sprite;
+    }
+
+    public bool FruitHasCollided()
+    {
+        return hasCollided;
+    }
+
+    public bool CanFruitMerge()
+    {
+        return canFruitMerge;
     }
 }

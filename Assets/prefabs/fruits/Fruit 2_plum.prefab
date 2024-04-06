@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3358031588739948491}
   - component: {fileID: 7023912269730664510}
   m_Layer: 0
-  m_Name: Fruit 3
+  m_Name: Fruit 2_plum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931af45abfd51a644843b5f46f087d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitType: 3
+  fruitSprite: {fileID: 3148667416485768376}
+  fruitType: 2
 --- !u!95 &7023912269730664510
 Animator:
   serializedVersion: 7
@@ -211,7 +212,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
     type: 3}
-  m_Color: {r: 1, g: 0.41176474, b: 0.9650195, a: 1}
+  m_Color: {r: 0.69430226, g: 0.41176474, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

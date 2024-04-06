@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System;
+
+using Random = UnityEngine.Random;
 
 public class FruitManager : MonoBehaviour
 {
@@ -18,8 +18,14 @@ public class FruitManager : MonoBehaviour
     private bool canSpawnFruit;
     private bool isControllingFruit;
 
+    [Header("Next fruit hint")]
+    private int nextFruitIndex;
+
     [Header("Debug")]
     [SerializeField] bool enableGizmos;
+
+    [Header("Events")]
+    public static Action onNextFruitIndexSet;
 
     private void Awake()
     {
@@ -33,8 +39,15 @@ public class FruitManager : MonoBehaviour
         MergeManager.onMergeHandled -= MergeCallback;
     }
 
+    private void Start()
+    {
+        SetNextFruitIndex();
+    }
+
     void Update()
     {
+        if(!GameManager.instance.IsGameState()) { return; }
+
         if(canSpawnFruit)
         {
             ManagePlayerInput();
@@ -70,7 +83,27 @@ public class FruitManager : MonoBehaviour
         Vector2 spawnPosition = GetSpawnPosition();
         //spawnPosition.y = fruitsYspawnPosition.position.y;
 
-        currentFruit = Instantiate(firstSpawnableFruits[Random.Range(0, firstSpawnableFruits.Length)], spawnPosition, Quaternion.identity, fruitsParent);
+        currentFruit = Instantiate(firstSpawnableFruits[nextFruitIndex], spawnPosition, Quaternion.identity, fruitsParent);
+
+        SetNextFruitIndex();
+    }
+
+    private void SetNextFruitIndex()
+    {
+        nextFruitIndex = Random.Range(0, firstSpawnableFruits.Length);
+
+        onNextFruitIndexSet?.Invoke();
+    }
+
+    public string GetFruitName()
+    {
+        return firstSpawnableFruits[nextFruitIndex].name;
+    }
+
+    public Sprite GetNextFruitImage()
+    {
+        return firstSpawnableFruits[nextFruitIndex].GetFruitSprite();
+        //return firstSpawnableFruits[nextFruitIndex].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
     }
 
     private void MouseDownCallback()
