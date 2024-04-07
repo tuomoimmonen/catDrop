@@ -6,8 +6,9 @@ using Random = UnityEngine.Random;
 public class FruitManager : MonoBehaviour
 {
     [Header("Elements")]
-    [SerializeField] Fruit[] fruitPrefabs;
-    [SerializeField] Fruit[] firstSpawnableFruits;
+    //[SerializeField] Fruit[] fruitPrefabs;
+    //[SerializeField] Fruit[] firstSpawnableFruits;
+    [SerializeField] SkinDataSO skinData;
     [SerializeField] Camera cam; //main camera
     [SerializeField] LineRenderer fruitSpawnLine;
     private Fruit currentFruit;
@@ -83,26 +84,26 @@ public class FruitManager : MonoBehaviour
         Vector2 spawnPosition = GetSpawnPosition();
         //spawnPosition.y = fruitsYspawnPosition.position.y;
 
-        currentFruit = Instantiate(firstSpawnableFruits[nextFruitIndex], spawnPosition, Quaternion.identity, fruitsParent);
+        currentFruit = Instantiate(skinData.GetSpawnablePrefabs()[nextFruitIndex], spawnPosition, Quaternion.identity, fruitsParent);
 
         SetNextFruitIndex();
     }
 
     private void SetNextFruitIndex()
     {
-        nextFruitIndex = Random.Range(0, firstSpawnableFruits.Length);
+        nextFruitIndex = Random.Range(0, skinData.GetSpawnablePrefabs().Length);
 
         onNextFruitIndexSet?.Invoke();
     }
 
     public string GetFruitName()
     {
-        return firstSpawnableFruits[nextFruitIndex].name;
+        return skinData.GetSpawnablePrefabs()[nextFruitIndex].name;
     }
 
     public Sprite GetNextFruitImage()
     {
-        return firstSpawnableFruits[nextFruitIndex].GetFruitSprite();
+        return skinData.GetSpawnablePrefabs()[nextFruitIndex].GetFruitSprite();
         //return firstSpawnableFruits[nextFruitIndex].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
     }
 
@@ -149,11 +150,11 @@ public class FruitManager : MonoBehaviour
 
     private void MergeCallback(FruitType fruitType, Vector2 spawnPosition)
     {
-        for (int i = 0; i < fruitPrefabs.Length; i++)
+        for (int i = 0; i < skinData.GetSpawnablePrefabs().Length; i++)
         {
-            if (fruitPrefabs[i].GetFruitType() == fruitType)
+            if (skinData.GetSpawnablePrefabs()[i].GetFruitType() == fruitType)
             {
-                SpawnMergedFruit(fruitPrefabs[i], spawnPosition); break;
+                SpawnMergedFruit(skinData.GetSpawnablePrefabs()[i], spawnPosition); break;
             }
         }
     }

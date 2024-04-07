@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1181178957055548927
+--- !u!1001 &6762173556696138850
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,12 +11,12 @@ PrefabInstance:
     - target: {fileID: 611526713425440089, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Name
-      value: 08_citron
+      value: 05_citrus
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
+      value: 0.41176474
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
@@ -26,12 +26,12 @@ PrefabInstance:
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.81568635
+      value: 0.95294124
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.41176474
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
@@ -41,27 +41,27 @@ PrefabInstance:
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.8166622
+      value: 0.95466065
       objectReference: {fileID: 0}
     - target: {fileID: 3358031588739948491, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: fruitType
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}

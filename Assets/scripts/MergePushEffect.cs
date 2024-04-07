@@ -25,6 +25,7 @@ public class MergePushEffect : MonoBehaviour
     {
         pushForce = Mathf.Lerp(pushForceMinMax.x, pushForceMinMax.y, pushForceValue);
     }
+
     private void MergeHandledCallback(FruitType fruitType, Vector2 mergePosition)
     {
         pushPosition = mergePosition;
@@ -35,10 +36,11 @@ public class MergePushEffect : MonoBehaviour
         {
             if(collider.TryGetComponent(out Fruit fruit))
             {
+                Rigidbody2D fruitRb = fruit.GetComponent<Rigidbody2D>();
                 Vector2 force = ((Vector2)fruit.transform.position - mergePosition).normalized;
                 force *= pushForce;
-                fruit.GetComponent<Rigidbody2D>().AddForce(force);
-
+                fruitRb.AddForce(force);
+                //fruit.GetComponent<Rigidbody2D>().AddForce(force);
             }
         }
     }

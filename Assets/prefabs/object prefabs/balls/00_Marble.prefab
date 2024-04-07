@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8247842329168781630
+--- !u!1001 &1972887811923217138
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,57 +11,37 @@ PrefabInstance:
     - target: {fileID: 611526713425440089, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Name
-      value: 06_apple
+      value: 00_Marble
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.41176474
+      value: 0.7490196
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
+      value: 0.7490196
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.5137255
+      value: 0.7490196
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.41176474
+      value: 0.6037736
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.6037736
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.5159398
-      objectReference: {fileID: 0}
-    - target: {fileID: 3358031588739948491, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: fruitType
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.2
+      value: 0.6037736
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}

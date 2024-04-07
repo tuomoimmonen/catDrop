@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2801790108139128806
+--- !u!1001 &1972887811923217138
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,77 +11,57 @@ PrefabInstance:
     - target: {fileID: 611526713425440089, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Name
-      value: 09_watermelon
+      value: 04_Football
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
+      value: 0.63529414
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
+      value: 0.27058825
       objectReference: {fileID: 0}
     - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.14901961
-      objectReference: {fileID: 0}
-    - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: InitialModule.startColor.minColor.b
-      value: 0.5691823
-      objectReference: {fileID: 0}
-    - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: InitialModule.startColor.minColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: InitialModule.startColor.minColor.r
-      value: 0.59316957
-      objectReference: {fileID: 0}
-    - target: {fileID: 1400751133236592709, guid: 79e9fb56498dc4b479f01229e04dde41,
-        type: 3}
-      propertyPath: InitialModule.startColor.minMaxState
-      value: 2
+      value: 0.20784315
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.63522005
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.2734457
       objectReference: {fileID: 0}
     - target: {fileID: 3148667416485768376, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.15776908
+      value: 0.2097424
       objectReference: {fileID: 0}
     - target: {fileID: 3358031588739948491, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: fruitType
-      value: 9
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5385242402409145174, guid: 79e9fb56498dc4b479f01229e04dde41,
         type: 3}
