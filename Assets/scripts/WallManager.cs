@@ -11,6 +11,11 @@ public class WallManager : MonoBehaviour
 
     void Start()
     {
+        FixWalls();
+    }
+
+    private void FixWalls()
+    {
         //cast to float, int gives weird results
         float aspectRatio = (float)Screen.height / Screen.width;
 
@@ -21,8 +26,4 @@ public class WallManager : MonoBehaviour
         leftWall.position = new Vector3(-halfScreenWidth - 0.25f, 0, 0); //assumes the wall is 1 unit wide
     }
 
-    void Update()
-    {
-        
-    }
 }

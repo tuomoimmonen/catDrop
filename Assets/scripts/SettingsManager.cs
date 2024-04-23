@@ -40,7 +40,6 @@ public class SettingsManager : MonoBehaviour
     {
         onPushForceChanged?.Invoke(pushForceSlider.value);
         onSfxValueChanged?.Invoke(sfxToggle.isOn);
-
     }
 
     public void ToggleCallback(bool sfxActive)
@@ -75,7 +74,7 @@ public class SettingsManager : MonoBehaviour
     private void LoadData()
     {
         pushForceSlider.value = PlayerPrefs.GetFloat(lastPushForceKey,0);
-        sfxToggle.isOn = PlayerPrefs.GetInt(isSoundOnKey) == 1;
+        sfxToggle.isOn = PlayerPrefs.GetInt(isSoundOnKey, 1) == 1;
     }
 
     private void SaveData()

@@ -114,4 +114,9 @@ public class Fruit : MonoBehaviour
     {
         return canFruitMerge;
     }
+
+    public Color GetFruitColor()
+    {
+        return fruitSprite.color;
+    }
 }

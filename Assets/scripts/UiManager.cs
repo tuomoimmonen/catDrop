@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,15 +11,22 @@ public class UiManager : MonoBehaviour
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject settingsPanel;
+    [SerializeField] GameObject shopPanel;
+    [SerializeField] GameObject mapPanel;
+
+    [Header("Events")]
+    public static Action onMapOpened;
 
     private void Awake()
     {
         GameManager.onGameStateChanged += GameStateChangedCallback;
+        LevelMapManager.onLevelButtonClicked += LevelButtonCallback;
     }
 
     private void OnDisable()
     {
         GameManager.onGameStateChanged -= GameStateChangedCallback;
+        LevelMapManager.onLevelButtonClicked -= LevelButtonCallback;
     }
 
     private void GameStateChangedCallback(GameState state)
@@ -44,6 +52,8 @@ public class UiManager : MonoBehaviour
         gameOverPanel.SetActive(false);
         gamePanel.SetActive(false);
         settingsPanel.SetActive(false);
+        shopPanel.SetActive(false);
+        mapPanel.SetActive(false);
     }
 
     private void SetGameOver()
@@ -51,6 +61,7 @@ public class UiManager : MonoBehaviour
         menuPanel.SetActive(false);
         gameOverPanel.SetActive(true);
         gamePanel.SetActive(false);
+        mapPanel.SetActive(false);
     }
 
     private void SetGame()
@@ -58,9 +69,10 @@ public class UiManager : MonoBehaviour
         menuPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         gamePanel.SetActive(true);
+        mapPanel.SetActive(false);
     }
 
-    public void PlayButtonCallback()
+    public void LevelButtonCallback()
     {
         GameManager.instance.SetGameState();
     }
@@ -79,4 +91,16 @@ public class UiManager : MonoBehaviour
     {
         settingsPanel.SetActive(false);
     }
+
+    public void ShopPanelCallback() => shopPanel.SetActive(true);
+
+    public void CloseShopPanel() => shopPanel.SetActive(false);
+
+    public void OpenMap() 
+    { 
+        mapPanel.SetActive(true);
+        onMapOpened?.Invoke();
+    }
+
+    public void CloseMap() => mapPanel.SetActive(false);
 }

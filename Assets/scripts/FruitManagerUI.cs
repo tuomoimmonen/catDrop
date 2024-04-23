@@ -27,5 +27,6 @@ public class FruitManagerUI : MonoBehaviour
     {
         nextFruitHintText.text = fruitManager.GetFruitName();
         nextFruitImage.sprite = fruitManager.GetNextFruitImage();
+        nextFruitImage.color = fruitManager.GetNextFruitColor();
     }
 }

@@ -2,9 +2,12 @@ using UnityEngine;
 using System;
 
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 public class FruitManager : MonoBehaviour
 {
+    public static FruitManager instance;
+
     [Header("Elements")]
     //[SerializeField] Fruit[] fruitPrefabs;
     //[SerializeField] Fruit[] firstSpawnableFruits;
@@ -27,17 +30,26 @@ public class FruitManager : MonoBehaviour
 
     [Header("Events")]
     public static Action onNextFruitIndexSet;
+    public static Action<Fruit> onFruitSpawned;
 
     private void Awake()
     {
+        if(instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        instance = this;
+
         HideLine();
         canSpawnFruit = true;
         MergeManager.onMergeHandled += MergeCallback;
+        ShopManager.onSkinSelected += SkinSelectedCallback;
     }
 
     private void OnDisable()
     {
         MergeManager.onMergeHandled -= MergeCallback;
+        ShopManager.onSkinSelected -= SkinSelectedCallback;
     }
 
     private void Start()
@@ -53,6 +65,11 @@ public class FruitManager : MonoBehaviour
         {
             ManagePlayerInput();
         }
+    }
+
+    private void SkinSelectedCallback(SkinDataSO selectedSkin)
+    {
+        skinData = selectedSkin;    
     }
 
     private void ManagePlayerInput()
@@ -87,6 +104,8 @@ public class FruitManager : MonoBehaviour
         currentFruit = Instantiate(skinData.GetSpawnablePrefabs()[nextFruitIndex], spawnPosition, Quaternion.identity, fruitsParent);
 
         SetNextFruitIndex();
+
+        onFruitSpawned?.Invoke(currentFruit);
     }
 
     private void SetNextFruitIndex()
@@ -107,13 +126,54 @@ public class FruitManager : MonoBehaviour
         //return firstSpawnableFruits[nextFruitIndex].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
     }
 
+    public Color GetNextFruitColor()
+    {
+        return skinData.GetSpawnablePrefabs()[nextFruitIndex].GetFruitColor();
+    }
+
+    public Fruit[] GetSmallFruitsForPowerUp()
+    {
+        List<Fruit> smallFruits = new List<Fruit>();
+
+        for (int i = 0; i < fruitsParent.childCount; i++)
+        {
+            Fruit fruit = fruitsParent.GetChild(i).GetComponent<Fruit>();
+
+            FruitType fruitType = fruit.GetFruitType();
+            int fruitTypeInt = (int)fruitType;
+
+            //what fruits to blast here
+            if (fruitTypeInt <= 3)
+            {
+                smallFruits.Add(fruit);
+            }
+            /*
+            if(fruitType == FruitType.Blueberry || fruitType == FruitType.Cherry || fruitType == FruitType.Plum || fruitType == FruitType.Peach)
+            {
+                smallFruits.Add(fruit);
+            }
+            */
+        }
+
+        return smallFruits.ToArray();
+    }
+
     private void MouseDownCallback()
     {
+        if (!IsClickDetected()) { return; }
+
         ShowLine();
         MoveFruitSpawnLine();
         SpawnFruit();
 
         isControllingFruit = true;
+    }
+    
+    private bool IsClickDetected()
+    {
+        Vector2 mousePosition = Input.mousePosition;
+
+        return mousePosition.y > Screen.height / 4;
     }
 
     private void MouseDragCallback()
@@ -150,11 +210,11 @@ public class FruitManager : MonoBehaviour
 
     private void MergeCallback(FruitType fruitType, Vector2 spawnPosition)
     {
-        for (int i = 0; i < skinData.GetSpawnablePrefabs().Length; i++)
+        for (int i = 0; i < skinData.GetObjectPrefabs().Length; i++)
         {
-            if (skinData.GetSpawnablePrefabs()[i].GetFruitType() == fruitType)
+            if (skinData.GetObjectPrefabs()[i].GetFruitType() == fruitType)
             {
-                SpawnMergedFruit(skinData.GetSpawnablePrefabs()[i], spawnPosition); break;
+                SpawnMergedFruit(skinData.GetObjectPrefabs()[i], spawnPosition); break;
             }
         }
     }

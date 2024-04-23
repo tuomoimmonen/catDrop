@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d459fe17f29ae7d499bb130935288547, type: 3}
   m_Name: 00_Fruits
   m_EditorClassIdentifier: 
+  name: Fruits
+  skinPrice: 250
   objectPrefabs:
   - {fileID: 717147956455427460, guid: d9c10f1a01b954c40bcea79fc955c50b, type: 3}
   - {fileID: 9211059343029951440, guid: 16f7d10d279fd8d46b2db2d4e9d834d0, type: 3}

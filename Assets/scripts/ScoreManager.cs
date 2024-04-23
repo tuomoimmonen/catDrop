@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager instance;
+
     [Header("Elements")]
     [SerializeField] TMP_Text gameScoreText;
     [SerializeField] TMP_Text highScoreText;
@@ -19,11 +21,18 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
+        if(instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        instance = this;
+
         MergeManager.onMergeHandled += MergeHandleCallback;
         GameManager.onGameStateChanged += GameChangedCallback;
 
         LoadData();
     }
+
 
     private void OnDisable()
     {
@@ -31,6 +40,7 @@ public class ScoreManager : MonoBehaviour
         GameManager.onGameStateChanged -= GameChangedCallback;
     }
 
+    public int GetHighScore() => highScore;
 
     private void GameChangedCallback(GameState gameState)
     {
