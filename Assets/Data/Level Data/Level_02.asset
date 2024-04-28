@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23ad5c8ddadbc844b805d42ddaa6bf3, type: 3}
   m_Name: Level_02
   m_EditorClassIdentifier: 
-  levelPrefab: {fileID: 101424348648506097, guid: 8935c9fb8fbdf4747be63c62bb785866,
+  levelPrefab: {fileID: 4332334713240726803, guid: c5661c966eff83844ad3a16de6c4f93e,
     type: 3}
-  requiredHighScore: 750
+  requiredHighScore: 550

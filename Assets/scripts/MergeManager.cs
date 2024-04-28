@@ -35,14 +35,16 @@ public class MergeManager : MonoBehaviour
         FruitType mergedFruitType = sender.GetFruitType();
         mergedFruitType += 1;
 
+        //in the middle of transforms
         Vector2 mergedSpawnPosition = (sender.transform.position + otherFruit.transform.position) / 2;
 
         //Destroy(sender.gameObject);
         //Destroy(otherFruit.gameObject);
+        sender.HandleMergeText();
+        sender.HandleMergeParticles();
+        otherFruit.HandleMergeParticles();
 
-        sender.HandleMerge();
-        otherFruit.HandleMerge();
-
+        //one frame pause
         StartCoroutine(ResetLastSender());
 
         onMergeHandled?.Invoke(mergedFruitType, mergedSpawnPosition);

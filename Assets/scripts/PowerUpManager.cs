@@ -42,7 +42,7 @@ public class PowerUpManager : MonoBehaviour
         }
         for (int i = 0; i < smallFruits.Length; i++)
         {
-            smallFruits[i].HandleMerge();
+            smallFruits[i].HandleMergeParticles();
         }
 
         CoinManager.instance.AddCoins(-blastPrice);

@@ -223,6 +223,7 @@ public class FruitManager : MonoBehaviour
     {
         Fruit fruitInstance = Instantiate(fruit, spawnPosition, Quaternion.identity, fruitsParent);
         fruitInstance.EnablePhysics();
+        //fruitInstance.HandleMergeText();
     }
 
     private void MoveFruitSpawnLine()

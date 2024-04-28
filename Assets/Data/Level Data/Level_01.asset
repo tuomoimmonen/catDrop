@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPrefab: {fileID: 4332334713240726803, guid: 42d6287058ebf33449133902aa467fd8,
     type: 3}
-  requiredHighScore: 500
+  requiredHighScore: 450

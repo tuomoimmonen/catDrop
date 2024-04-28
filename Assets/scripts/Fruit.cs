@@ -7,7 +7,8 @@ public class Fruit : MonoBehaviour
 {
     [Header("Elements")]
     private Rigidbody2D fruitRb;
-    private CircleCollider2D fruitCollider;
+    private Collider2D fruitCollider;
+    private Animator fruitAnimator;
     [SerializeField] SpriteRenderer fruitSprite;
 
     [Header("Events")]
@@ -20,11 +21,13 @@ public class Fruit : MonoBehaviour
 
     [Header("Effects")]
     [SerializeField] ParticleSystem mergeParticles;
+    [SerializeField] ParticleSystem[] mergeTextEffects;
 
 
     private void Awake()
     {
-        fruitCollider = GetComponent<CircleCollider2D>();
+        fruitAnimator = GetComponent<Animator>();
+        fruitCollider = GetComponent<Collider2D>();
         fruitRb = GetComponent<Rigidbody2D>();
     }
 
@@ -42,7 +45,6 @@ public class Fruit : MonoBehaviour
     {
         fruitRb.bodyType = RigidbodyType2D.Dynamic;
         fruitCollider.enabled = true;
-        
     }
 
     public void DisablePhysics()
@@ -57,6 +59,7 @@ public class Fruit : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        PlayCollisionAnimation();
         ManageCollision(collision);
     }
 
@@ -73,6 +76,7 @@ public class Fruit : MonoBehaviour
 
         if (collision.collider.TryGetComponent(out Fruit otherFruit))
         {
+
             if (!otherFruit.CanFruitMerge()) { return; }
 
             if (otherFruit.GetFruitType() != fruitType)
@@ -85,14 +89,37 @@ public class Fruit : MonoBehaviour
         }
     }
 
-    public void HandleMerge()
+    public void HandleMergeParticles()
     {
         if(mergeParticles != null)
         {
             mergeParticles.transform.SetParent(null);
             mergeParticles.Play();
         }
+        StartCoroutine(StartObjectDestroy());
+        //Destroy(gameObject);
+    }
+
+    private IEnumerator StartObjectDestroy()
+    {
+        yield return new WaitForEndOfFrame();
         Destroy(gameObject);
+    }
+
+    public void HandleMergeText()
+    {
+        if(mergeTextEffects != null)
+        {
+            int randomEffect = UnityEngine.Random.Range(0, mergeTextEffects.Length);
+            mergeTextEffects[randomEffect].transform.SetParent(null);
+            mergeTextEffects[randomEffect].transform.localScale = Vector3.one; //resets the fruits scale before playing the text bubble
+            mergeTextEffects[randomEffect].Play();
+        }
+    }
+
+    private void PlayCollisionAnimation()
+    {
+        fruitAnimator.Play("FruitCollision");
     }
 
     public FruitType GetFruitType()
