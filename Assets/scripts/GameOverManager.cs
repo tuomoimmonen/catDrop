@@ -13,10 +13,6 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] float durationBeforeGameOver;
     private float timer;
     private bool timerOn;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

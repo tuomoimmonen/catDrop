@@ -26,11 +26,13 @@ public class CoinManager : MonoBehaviour
         LoadData();
 
         MergeManager.onMergeHandled += MergeHandledCallback;
+        UiManager.onMenuButtonPressedIngame += SaveData;
     }
 
     private void OnDisable()
     {
         MergeManager.onMergeHandled -= MergeHandledCallback;
+        UiManager.onMenuButtonPressedIngame -= SaveData;
     }
 
     private void Start()

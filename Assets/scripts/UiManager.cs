@@ -16,6 +16,10 @@ public class UiManager : MonoBehaviour
 
     [Header("Events")]
     public static Action onMapOpened;
+    public static Action onMenuButtonPressedIngame;
+
+    [Header("Settings")]
+    private bool isSettingsPanelOn;
 
     private void Awake()
     {
@@ -82,9 +86,17 @@ public class UiManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void MenuButtonPressedWhenIngameCallback()
+    {
+        onMenuButtonPressedIngame?.Invoke();
+        SceneManager.LoadScene(0);
+    }
+
     public void SettingsButtonCallback()
     {
-        settingsPanel.SetActive(true);
+        isSettingsPanelOn = !isSettingsPanelOn;
+        settingsPanel.SetActive(isSettingsPanelOn);
+
     }
 
     public void CloseSettingsPanel()

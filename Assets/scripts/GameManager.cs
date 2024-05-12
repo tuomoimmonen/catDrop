@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         SetMenuState();
+
+        Application.targetFrameRate = 60;
     }
 
     private void SetMenuState()

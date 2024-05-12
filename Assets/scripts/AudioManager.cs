@@ -30,6 +30,7 @@ public class AudioManager : MonoBehaviour
     private void SfxValueChangedCallback(bool sfxActive)
     {
         mergeSource.mute = !sfxActive;
+        mergeSource2.mute = !sfxActive;
         spawnSource.mute = !sfxActive;
         //mergeSource.volume = sfxActive ? 1.0f : 0.0f; //true = 1, false 0
     }
@@ -65,5 +66,12 @@ public class AudioManager : MonoBehaviour
         float randomPitch = Random.Range(0.95f, 1.1f);
         spawnSource.clip = spawnClips[Random.Range(0, spawnClips.Length)];
         spawnSource.Play();
+    }
+
+    public void OnButtonClickedCallback()
+    {
+        float randomPitch = Random.Range(0.8f, 1.2f);
+        mergeSource.clip = spawnClips[0];
+        mergeSource.Play();
     }
 }

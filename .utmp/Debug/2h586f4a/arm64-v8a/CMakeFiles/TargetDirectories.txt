@@ -1,0 +1,5 @@
+C:/Unity Projektit/catDrop/catDrop/.utmp/Debug/2h586f4a/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Unity Projektit/catDrop/catDrop/.utmp/Debug/2h586f4a/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Unity Projektit/catDrop/catDrop/.utmp/Debug/2h586f4a/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Unity Projektit/catDrop/catDrop/.utmp/Debug/2h586f4a/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Unity Projektit/catDrop/catDrop/.utmp/Debug/2h586f4a/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

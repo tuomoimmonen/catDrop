@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class FruitManagerUI : MonoBehaviour
 {
     [Header("Elements")]
-    [SerializeField] TMP_Text nextFruitHintText;
+    //[SerializeField] TMP_Text nextFruitHintText;
     [SerializeField] Image nextFruitImage;
     private FruitManager fruitManager;
 
@@ -23,9 +23,15 @@ public class FruitManagerUI : MonoBehaviour
         FruitManager.onNextFruitIndexSet -= UpdateNextFruitHint;
     }
 
+    private void Start()
+    {
+        nextFruitImage.sprite = null;
+        nextFruitImage.color = Color.clear;
+    }
+
     private void UpdateNextFruitHint()
     {
-        nextFruitHintText.text = fruitManager.GetFruitName();
+        //nextFruitHintText.text = fruitManager.GetFruitName();
         nextFruitImage.sprite = fruitManager.GetNextFruitImage();
         nextFruitImage.color = fruitManager.GetNextFruitColor();
     }

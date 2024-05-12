@@ -22,8 +22,8 @@ public class WallManager : MonoBehaviour
         //unity cam ortho size 5 = 5 units from middle to top or bottom
         float halfScreenWidth = cam.orthographicSize / aspectRatio;
 
-        rightWall.position = new Vector3(halfScreenWidth + 0.25f, 0, 0); //assumes the wall is 1 unit wide
-        leftWall.position = new Vector3(-halfScreenWidth - 0.25f, 0, 0); //assumes the wall is 1 unit wide
+        rightWall.position = new Vector3(halfScreenWidth + 0.5f, 0, 0); //assumes the wall is 1 unit wide
+        leftWall.position = new Vector3(-halfScreenWidth - 0.5f, 0, 0); //assumes the wall is 1 unit wide
     }
 
 }

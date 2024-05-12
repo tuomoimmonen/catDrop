@@ -10,15 +10,18 @@ public class SettingsManager : MonoBehaviour
     [Header("Elements")]
     [SerializeField] GameObject resetProgressPrompt;
     [SerializeField] Slider pushForceSlider;
+    [SerializeField] Slider musicVolumeSlider;
     [SerializeField] Toggle sfxToggle;
 
     [Header("Events")]
     public static Action<float> onPushForceChanged;
+    public static Action<float> onMusicVolumeChanged;
     public static Action<bool> onSfxValueChanged;
 
     [Header("Data")]
     private const string lastPushForceKey = "lastPushForceKey";
     private const string isSoundOnKey = "isSoundOnKey";
+    private const string lastVolumeValueKey = "lastVolumeKey";
     private bool isSoundOn;
     private bool canSave;
 
@@ -71,9 +74,17 @@ public class SettingsManager : MonoBehaviour
         SaveData();
     }
 
+    public void MusicVolumeSliderValueChanged()
+    {
+        onMusicVolumeChanged?.Invoke(musicVolumeSlider.value);
+
+        SaveData();
+    }
+
     private void LoadData()
     {
         pushForceSlider.value = PlayerPrefs.GetFloat(lastPushForceKey,0);
+        musicVolumeSlider.value = PlayerPrefs.GetFloat(lastVolumeValueKey,0.5f);
         sfxToggle.isOn = PlayerPrefs.GetInt(isSoundOnKey, 1) == 1;
     }
 
@@ -83,6 +94,7 @@ public class SettingsManager : MonoBehaviour
 
         int sfxValue = sfxToggle.isOn ? 1 : 0;
         PlayerPrefs.SetFloat(lastPushForceKey , pushForceSlider.value);
+        PlayerPrefs.SetFloat(lastVolumeValueKey , musicVolumeSlider.value);
         PlayerPrefs.SetInt(isSoundOnKey, sfxValue);
     }
 }

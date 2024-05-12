@@ -10,6 +10,9 @@ public class Fruit : MonoBehaviour
     private Collider2D fruitCollider;
     private Animator fruitAnimator;
     [SerializeField] SpriteRenderer fruitSprite;
+    //[SerializeField] SkinDataSO skinData;
+
+    //private ObjectPool<Fruit> fruitPool;
 
     [Header("Events")]
     public static Action<Fruit, Fruit> onFruitCollision;
@@ -19,9 +22,14 @@ public class Fruit : MonoBehaviour
     private bool hasCollided;
     private bool canFruitMerge;
 
+    //[SerializeField] float minXpos, maxXpos;
+
     [Header("Effects")]
     [SerializeField] ParticleSystem mergeParticles;
     [SerializeField] ParticleSystem[] mergeTextEffects;
+    //[SerializeField] ParticleSystem lowComboParticles;
+    //[SerializeField] ParticleSystem medComboParticles;
+    //[SerializeField] ParticleSystem highComboParticles;
 
 
     private void Awake()
@@ -33,6 +41,7 @@ public class Fruit : MonoBehaviour
 
     private void Start()
     {
+
         Invoke("AllowFruitMerge", 0.5f);
     }
 
@@ -40,6 +49,20 @@ public class Fruit : MonoBehaviour
     {
         canFruitMerge = true;
     }
+
+    /*
+    private void OnEnable()
+    {
+        Invoke("AllowFruitMerge", 0.5f);
+        hasCollided = false;
+    }
+
+    private void OnDisable()
+    {
+        canFruitMerge = false;
+        hasCollided = false;
+    }
+    */
 
     public void EnablePhysics()
     {
@@ -50,11 +73,14 @@ public class Fruit : MonoBehaviour
     public void DisablePhysics()
     {
         fruitRb.bodyType = RigidbodyType2D.Kinematic;
+        //fruitCollider.enabled = false;
     }
 
     public void MoveTo(Vector2 targetPosition)
     {
         transform.position = targetPosition;
+        //if(transform.position.x <= minXpos) { transform.position = new Vector2(minXpos, transform.position.y); }
+        //else if(transform.position.x >= maxXpos) { transform.position = new Vector2(maxXpos, transform.position.y); }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -70,6 +96,7 @@ public class Fruit : MonoBehaviour
 
     private void ManageCollision(Collision2D collision)
     {
+        //Debug.Log("collision");
         hasCollided = true;
 
         if (!canFruitMerge) { return; }
@@ -78,6 +105,7 @@ public class Fruit : MonoBehaviour
         {
 
             if (!otherFruit.CanFruitMerge()) { return; }
+            if (otherFruit.GetFruitType() == FruitType.Watermelon) { return; } //guard for not destroying largest fruit
 
             if (otherFruit.GetFruitType() != fruitType)
             {
@@ -91,12 +119,14 @@ public class Fruit : MonoBehaviour
 
     public void HandleMergeParticles()
     {
+        //int index = (int)fruitType;
         if(mergeParticles != null)
         {
             mergeParticles.transform.SetParent(null);
             mergeParticles.Play();
         }
         StartCoroutine(StartObjectDestroy());
+
         //Destroy(gameObject);
     }
 
@@ -104,6 +134,11 @@ public class Fruit : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         Destroy(gameObject);
+        //DisablePhysics();
+        //hasCollided = false;
+        //FruitManager.instance.spawnableFruitsPool.Release(this);
+        //if(index <= 3) { FruitManager.instance.spawnableFruitsPool.Release(this); }
+        //else { FruitManager.instance.mergeFruitsPool.Release(this); }
     }
 
     public void HandleMergeText()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,10 +12,13 @@ public class ScoreManager : MonoBehaviour
     [Header("Elements")]
     [SerializeField] TMP_Text gameScoreText;
     [SerializeField] TMP_Text highScoreText;
+    //[SerializeField] TMP_Text topScoresText;
 
     [Header("Data")]
     private int score;
-    private int highScore;
+    public int[] highScores = new int[3];
+    private int topScore;
+    private bool canUpdateHighScore = true;
 
     [Header("Settings")]
     [SerializeField] float scoreMultiplier = 2;
@@ -29,7 +33,9 @@ public class ScoreManager : MonoBehaviour
 
         MergeManager.onMergeHandled += MergeHandleCallback;
         GameManager.onGameStateChanged += GameChangedCallback;
+        UiManager.onMenuButtonPressedIngame += CalculateHighscore;
 
+        highScores = new int[3];
         LoadData();
     }
 
@@ -38,9 +44,10 @@ public class ScoreManager : MonoBehaviour
     {
         MergeManager.onMergeHandled -= MergeHandleCallback;
         GameManager.onGameStateChanged -= GameChangedCallback;
+        UiManager.onMenuButtonPressedIngame -= CalculateHighscore;
     }
 
-    public int GetHighScore() => highScore;
+    public int GetHighScore() => topScore;
 
     private void GameChangedCallback(GameState gameState)
     {
@@ -49,12 +56,21 @@ public class ScoreManager : MonoBehaviour
             case GameState.GameOver:
                 CalculateHighscore();
                 break;
+            case GameState.Menu:
+                canUpdateHighScore = true;
+                break;
         }
     }
 
     private void UpdateHighscoreText()
     {
-        highScoreText.text = highScore.ToString();
+        highScoreText.text = "";
+
+        for (int i = 0; i < 3; i++)
+        {
+            highScoreText.text += (i+1) + "." + highScores[i] + "\n";
+        }
+        //highScoreText.text = highScore.ToString();
     }
 
     private void Start()
@@ -78,20 +94,58 @@ public class ScoreManager : MonoBehaviour
 
     private void CalculateHighscore()
     {
-        if(score > highScore)
+        if (!canUpdateHighScore) { return; } //EVENT FIRE GUARD
+        canUpdateHighScore = false;
+
+        LoadData();
+        
+        for (int i = 0; i < highScores.Length; i++)
+        {
+            if (score > highScores[i])
+            {
+                for (int j = highScores.Length - 1; j > i; j--)
+                {
+                    highScores[j] = highScores[j - 1];
+                    //Debug.Log(highScores[j]);
+                }
+
+                highScores[i] = score;
+                break;
+            }
+        }
+
+        for (int i = 0; i < highScores.Length; i++)
+        {
+            SaveData(i);
+        }
+
+        /*
+        if (score > highScore)
         {
             highScore = score;
             SaveData();
         }
+        */
     }
 
+    
     private void LoadData()
     {
-        highScore = PlayerPrefs.GetInt("highscore", 0);
-    }
+        
+        for (int i = 0; i < 3; i++)
+        {
+            highScores[i] = PlayerPrefs.GetInt("highscore" + i, 0);
+            //Debug.Log(highScores[i]);
+        }
 
-    private void SaveData()
+        topScore = highScores[0];
+        
+        //highScores[0] = PlayerPrefs.GetInt("highscore" + 0, 0);
+    }
+    
+
+    private void SaveData(int index)
     {
-        PlayerPrefs.SetInt("highscore", highScore);
+        PlayerPrefs.SetInt("highscore" + index, highScores[index]);
     }
 }

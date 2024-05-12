@@ -21,9 +21,10 @@ public class LevelMapManager : MonoBehaviour
         UiManager.onMapOpened += UpdateLevelButtonsInterractability;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         UiManager.onMapOpened -= UpdateLevelButtonsInterractability;
+
     }
     void Start()
     {
